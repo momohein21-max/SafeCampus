@@ -1,0 +1,41 @@
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "safecampus.route";
+option java_outer_classname = "SafeRouteProto";
+
+package route;
+
+service SafeRouteService {
+  rpc GetSafeRoutes(SafeRouteRequest) returns (stream SafeRouteResponse);
+  rpc LiveSafetyMonitoring(stream LocationUpdate) returns (stream SafetyNotification);
+}
+
+message SafeRouteRequest {
+  double startLatitude = 1;
+  double startLongitude = 2;
+  double endLatitude = 3;
+  double endLongitude = 4;
+  double maxAllowedRisk = 5;
+}
+
+message SafeRouteResponse {
+  int32 distanceMeters = 1;
+  int32 estimatedTimeMinutes = 2;
+  double safetyRating = 3;
+  string routeSummary = 4;
+}
+
+message LocationUpdate {
+  string userId = 1;
+  double currentLatitude = 2;
+  double currentLongitude = 3;
+  string timestamp = 4;
+}
+
+message SafetyNotification {
+  string message = 1;
+  double riskLevel = 2;
+  string nearbySupport = 3;
+}
