@@ -1,0 +1,26 @@
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "safecampus.incident";
+option java_outer_classname = "IncidentReportProto";
+
+package incident;
+
+service IncidentReportService {
+  rpc SubmitIncident(stream IncidentRequest) returns (IncidentResponse);
+}
+
+message IncidentRequest {
+  string incidentType = 1;
+  string description = 2;
+  string location = 3;
+  string date = 4;
+  string time = 5;
+  string optionalComments = 6;
+}
+
+message IncidentResponse {
+  string confirmationMessage = 1;
+  string reportId = 2;
+}
