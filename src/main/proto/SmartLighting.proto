@@ -1,0 +1,24 @@
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "safecampus.lighting";
+option java_outer_classname = "SmartLightingProto";
+
+package lighting;
+
+service SmartLightingService {
+  rpc SetZoneBrightness(LightingRequest) returns (LightingResponse);
+}
+
+message LightingRequest {
+  string zoneId = 1;
+  string expectedBrightnessLevel = 2;
+  string reason = 3;
+}
+
+message LightingResponse {
+  string confirmationMessage = 1;
+  string zoneId = 2;
+  string appliedBrightnessLevel = 3;
+}
